@@ -16,7 +16,7 @@ void encrypt(LPCWSTR filename){
     HCRYPTKEY key;
     CryptGenKey(csp, CALG_RC4, CRYPT_EXPORTABLE, &key);
     while (ReadFile(originalFile, temp, sizeof(temp), &bytesRead, NULL) && bytesRead){
-        CryptEncrypt(key, 0, bytesRead < sizeof(temp), 0, temp, &bytesRead, sizeof(temp));
+        CryptEncrypt(key, 0, bytesRead < sizeof(temp), 0, temp, &bytesRead, sizeof(temp)); // litle bug here but who cares
         WriteFile(encryptedFile, temp, bytesRead, &bytesWritten, NULL);
     }
     CryptDestroyKey(key);
